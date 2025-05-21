@@ -48,6 +48,11 @@ function talk_state() {
     text3.textContent = "[Return]";
 }
 
+function kofi_link() {
+    url="https://ko-fi.com/s/5a60ba39ef";
+    window.open(url, '_blank').focus();
+}
+
 function leave_state() {
     var speech = document.getElementById("SpeechBubble");
     speech.textContent = "Did you really think you could leave ?"; 
@@ -70,6 +75,10 @@ function second_text() {
     if (currentState === state.Init) {
         talk_state();
         console.log("Talk state");
+    }
+
+    if (currentState === state.Shop) {
+        kofi_link();
     }
 }
 
