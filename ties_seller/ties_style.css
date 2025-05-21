@@ -109,6 +109,9 @@ hr {
 }
 
 .seller_text {
+  background:none;
+  border:none;
+
   background-color: #8d272f;
   border: white 10px solid;
   border-radius: 10px;
@@ -122,12 +125,23 @@ hr {
   /* box-sizing: border-box; */
 }
 
-.seller_text span:hover {
+/* .seller_text span:hover {
   font-weight: bold;
-  /* text-decoration: underline; */
+  text-decoration: underline;
+} */
+
+
+button.link {
+  background:none;
+  border:none;
+  color: white;
+  font-size: 20px;
+  font-family: Georgia, serif
 }
 
-
+button.link:hover {
+  font-weight: bold;
+}
 
 
 
