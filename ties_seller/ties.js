@@ -48,6 +48,11 @@ function talk_state() {
     text3.textContent = "[Return]";
 }
 
+function talk1() {
+    var speech = document.getElementById("SpeechBubble");
+    // speech.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. ";
+}
+
 function kofi_link() {
     url="https://ko-fi.com/s/5a60ba39ef";
     window.open(url, '_blank').focus();
@@ -66,6 +71,9 @@ function first_text() {
         shop_state();
         console.log("Shop state");
     }
+
+    if (currentState === state.Talk) {
+        talk1();    }
 }
 
 function second_text() {
