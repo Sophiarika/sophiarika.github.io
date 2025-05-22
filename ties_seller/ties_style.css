@@ -17,7 +17,9 @@ hr {
   align-items: center;
   justify-content: center;
 
-  width: 100%;
+  width: auto; /* 100%; */
+
+  border: 2px solid red; /* FIXME : remove later */
 }
 
 .seller_background {
@@ -28,7 +30,9 @@ hr {
   padding: 10px;
   margin: 20px;
 
-  background-image: url("./IMG_2124.PNG");
+  background-image:
+    url("./IMG_2126.PNG"),
+    url("./IMG_2125.PNG");
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
@@ -49,30 +53,86 @@ hr {
   /* https://stackoverflow.com/questions/52472285/how-to-put-a-background-image-behind-div */
   /* https://forum.freecodecamp.org/t/place-an-img-behind-a-signup-div/266285 */
 
+
+  border: 2px solid green; /* FIXME : remove later */
+
 }
 
 .character_bubble_container {
+  /* width: auto;
+  height: auto; */
+  
   display: flex;
   align-items: center;
   justify-content: space-around;
 
   position:relative;
   z-index: 1;
+
+  border: 2px solid blue; /* FIXME : remove later */
+
+  overflow:auto; 
 }
 
 .seller_image {
-  /* width: auto;
-  height: auto; */
-  /* max-width: 1000px; 
-  max-height: 1000px;  */
-  padding: 10px;
-  margin: 20px;
-  /* background-color: rgb(0, 49, 0); */
+  width: auto;
+  height: auto;
+  /* max-width: 500px; 
+  max-height: 1000px; */
+
+  /* background-image: url("./IMG_2127.PNG"); */
+
+  border: 2px solid red; /* FIXME : remove later */
+
+  aspect-ratio: 11/10;
 }
 
-.seller_bubble {
+.seller_image img {
+    width: 100%;
+    height: auto;
+}
+
+.bubble {
+
+  /* aspect-ratio: 19/10;
+
+  padding-left: 50px;
+  margin-left: 50px;
+
   font-size: 20px;
   font-weight: bold;
+  text-align: center;
+  color: black; */
+
+  border: 2px solid black; /* FIXME : remove later */
+}
+
+.seller_bubble_name {
+  background-color: white;
+  /* border: white 5px solid;
+  border-radius: 5px; */
+
+  margin-left: 50px;
+
+
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}
+
+.seller_bubble_text {
+  background-image: url("./IMG_2128_Bubble.PNG");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  aspect-ratio: 19/10;
+
+  /* padding-left: 50px; */
+
+  font-size: 20px;
+  /* font-weight: bold; */
   text-align: center;
   color: black;
 }
@@ -83,9 +143,9 @@ hr {
   border-radius: 10px;
   font-size: 20px; */
 
-  /* width: 1000px; */
+  width: 700px; /* FIXME : find a way to have it take most place on screen without needing to fic it manually */
 
-  text-align: center;
+  text-align: left;
   color: white;
   margin: 5px;
   padding: 5px;
@@ -94,6 +154,8 @@ hr {
   bottom: 0px;
   /* margin-top: auto; */
   z-index: 2;
+
+  border: 2px solid white; /* FIXME : remove later */
 
   /* float: left; */
 }
@@ -104,18 +166,20 @@ hr {
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
+  text-align: left;
+  
   margin: 10px;
   padding: 10px;
 }
 
 .seller_text {
-  background:none;
-  border:none;
-
   background-color: #8d272f;
   border: white 10px solid;
   border-radius: 10px;
+
   font-size: 20px;
+  text-align: center;
+
   margin: 10px;
   padding: 10px;
 
@@ -124,12 +188,6 @@ hr {
   /* max-width: 1000px;  */
   /* box-sizing: border-box; */
 }
-
-/* .seller_text span:hover {
-  font-weight: bold;
-  text-decoration: underline;
-} */
-
 
 button.link {
   background:none;
