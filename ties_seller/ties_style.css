@@ -63,7 +63,7 @@ hr {
   height: auto; */
   
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: space-around;
 
   position:relative;
@@ -90,13 +90,15 @@ hr {
 .seller_image img {
     width: 100%;
     height: auto;
+
+    max-width: 600px;
 }
 
 .bubble {
 
-  /* aspect-ratio: 19/10;
+  aspect-ratio: 19/10;
 
-  padding-left: 50px;
+  /* padding-left: 50px;
   margin-left: 50px;
 
   font-size: 20px;
@@ -108,16 +110,16 @@ hr {
 }
 
 .seller_bubble_name {
+  width: max-content;
   background-color: white;
-  /* border: white 5px solid;
-  border-radius: 5px; */
+  /* border: white 1px solid; */
+  /* border-radius: 5px; */
 
   margin-left: 50px;
 
-
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   color: black;
 }
 
