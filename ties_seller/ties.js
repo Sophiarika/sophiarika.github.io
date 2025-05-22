@@ -6,6 +6,9 @@ const state = {
 
 var currentState = state.Init;
 
+var talk_count = 0;
+var leave_count = 0;
+
 function initial_state() {
     currentState = state.Init;
 
@@ -51,16 +54,34 @@ function talk_state() {
 function talk1() {
     var speech = document.getElementById("SpeechBubble");
     // speech.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. ";
+    
+}
+
+function talk2() {
+    var speech = document.getElementById("SpeechBubble");
+    // speech.textContent = "";
+    
 }
 
 function kofi_link() {
     url="https://ko-fi.com/s/5a60ba39ef";
     window.open(url, '_blank').focus();
+
+    var speech = document.getElementById("SpeechBubble");
+    // speech.textContent = "What do you want ?" // FIXME: 
 }
 
-function leave_state() {
+function leave_dialogue() {
     var speech = document.getElementById("SpeechBubble");
-    speech.textContent = "Did you really think you could leave ?"; 
+
+    if (leave_count === 0) {
+        speech.textContent = "Did you really think you could leave ?";
+    }
+    else if (leave_count > 0) {
+        speech.textContent = "Trying that again ?";
+    }
+
+    leave_count += 1;
 }
 
 function first_text() {
@@ -102,7 +123,7 @@ function third_text() {
         console.log("Init state");
     }
     else if (currentState === state.Init) {
-        leave_state();
+        leave_dialogue();
         console.log("Leave state");
     }
 }
