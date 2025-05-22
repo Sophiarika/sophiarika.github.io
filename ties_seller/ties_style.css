@@ -193,13 +193,3 @@ button.link {
 button.link:hover {
   font-weight: bold;
 }
-
-
-
-.blaeck-box {
-  position: relativ;
-  z-index: 1;
-  border: 2px solid black;
-  height: 400px;
-  margin: 30px;
-}
