@@ -129,14 +129,19 @@ hr {
   background-size: contain;
   background-position: center;
 
+  width: 300px;
   aspect-ratio: 19/10;
 
-  /* padding-left: 50px; */
+  display: inline flex;
+}
 
+.seller_bubble_text p {
   font-size: 20px;
-  /* font-weight: bold; */
-  text-align: center;
+  text-align: left;
   color: black;
+
+  padding-left: 55px;
+  padding-right: 5px;
 }
 
 .dialogue_box {
