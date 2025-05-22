@@ -18,8 +18,6 @@ hr {
   justify-content: center;
 
   width: auto; /* 100%; */
-
-  border: 2px solid red; /* FIXME : remove later */
 }
 
 .seller_background {
@@ -50,12 +48,6 @@ hr {
   flex-direction: column;
 
   position:relative;
-  /* https://stackoverflow.com/questions/52472285/how-to-put-a-background-image-behind-div */
-  /* https://forum.freecodecamp.org/t/place-an-img-behind-a-signup-div/266285 */
-
-
-  border: 2px solid green; /* FIXME : remove later */
-
 }
 
 .character_bubble_container {
@@ -69,8 +61,6 @@ hr {
   position:relative;
   z-index: 1;
 
-  border: 2px solid blue; /* FIXME : remove later */
-
   overflow:auto; 
 }
 
@@ -79,10 +69,6 @@ hr {
   height: auto;
   /* max-width: 500px; 
   max-height: 1000px; */
-
-  /* background-image: url("./IMG_2127.PNG"); */
-
-  border: 2px solid red; /* FIXME : remove later */
 
   aspect-ratio: 11/10;
 }
@@ -105,8 +91,6 @@ hr {
   font-weight: bold;
   text-align: center;
   color: black; */
-
-  border: 2px solid black; /* FIXME : remove later */
 }
 
 .seller_bubble_name {
@@ -161,8 +145,6 @@ hr {
   bottom: 0px;
   /* margin-top: auto; */
   z-index: 2;
-
-  border: 2px solid white; /* FIXME : remove later */
 
   /* float: left; */
 }
