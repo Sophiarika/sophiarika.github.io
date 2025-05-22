@@ -53,7 +53,7 @@ hr {
 .character_bubble_container {
   /* width: auto;
   height: auto; */
-  
+
   display: flex;
   align-items: top;
   justify-content: space-around;
@@ -81,8 +81,7 @@ hr {
 }
 
 .bubble {
-
-  aspect-ratio: 19/10;
+  width: 300px;
 
   /* padding-left: 50px;
   margin-left: 50px;
@@ -110,11 +109,10 @@ hr {
 .seller_bubble_text {
   background-image: url("./IMG_2128_Bubble.PNG");
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size:  100% 100%;
   background-position: center;
 
-  width: 300px;
-  aspect-ratio: 19/10;
+  /* aspect-ratio: 19/10 auto; */
 
   display: inline flex;
 }
@@ -126,6 +124,7 @@ hr {
 
   padding-left: 55px;
   padding-right: 5px;
+  padding-bottom: 55px;
 }
 
 .dialogue_box {
