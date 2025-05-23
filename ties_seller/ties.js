@@ -106,8 +106,17 @@ function leave_dialogue() {
     else if (leave_count === 1) {
         speech.textContent = "Trying that again ?";
     }
-    else if (leave_count > 1) {
+    else if (leave_count === 2) {
         speech.textContent = "*Sigh*";
+    }
+    else if (leave_count === 3) {
+        speech.textContent = "Oh fuck off! I'm not a videogame boss so let me be a nuisance and-";
+    }
+    else {
+        url="https://ko-fi.com/s/5a60ba39ef";
+        window.open(url, '_blank').focus();
+        
+        speech.textContent = ">:)";
     }
 
     leave_count += 1;
