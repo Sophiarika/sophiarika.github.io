@@ -9,6 +9,7 @@ var currentState = state.Init;
 var talk_count = 0;
 var leave_count = 0;
 
+// Initial state
 function initial_state() {
     currentState = state.Init;
 
@@ -21,7 +22,7 @@ function initial_state() {
     text3.textContent = "[Leave]";
 }
 
-
+// Shop
 function shop_state() {
     currentState = state.Shop;
 
@@ -37,11 +38,7 @@ function shop_state() {
     text3.textContent = "[Return]";
 }
 
-// Shop dialogue options
-// function 
-// FIXME : decide what the first option should be about
-// "How do you make the ties ?"
-
+//// Shop dialogue options
 function shop_question() {
     var speech = document.getElementById("SpeechBubble");
     // speech.textContent = "I have differents design mostly inspired by various piece of media, but who can be wear with more casual outfit. Some desigins are sublte enough to not be seen as a reference immediatly.";
@@ -54,9 +51,10 @@ function kofi_link() {
     window.open(url, '_blank').focus();
 
     var speech = document.getElementById("SpeechBubble");
-    speech.textContent = "Thank you for having checked my shop!";
+    speech.textContent = "I hope you found something that sparked your interest.";
 }
 
+// Talk
 function talk_state() {
     currentState = state.Talk;
 
@@ -68,33 +66,35 @@ function talk_state() {
     else if (talk_count === 1) {
         speech.textContent = "Yes ?";
     }
-    else if (talk_count > 1) {
+    else if (talk_count <= 3) {
         speech.textContent = "Want to talk *again*?";
+    }
+    else {
+        speech.textContent = "What *more* would you *really* need to know ?";
     }
 
     var text1 = document.getElementById("FirstText");
     var text2 = document.getElementById("SecondText");
     var text3 = document.getElementById("ThirdText");
 
-    text1.textContent = "Something";
-    text2.textContent = "Something else";
+    text1.textContent = "Who are you ?";
+    text2.textContent = "Where are we ?";
     text3.textContent = "[Return]";
 
     talk_count += 1;
 }
 
-// Talk dialogue options
+//// Talk dialogue options
 // FIXME : Figure out what to talk about actually
 function talk1() {
     var speech = document.getElementById("SpeechBubble");
     // speech.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. ";
-    
+    speech.textContent = "Just a simple tie seller, wanting to provide you with a nice tie."
 }
 
 function talk2() {
     var speech = document.getElementById("SpeechBubble");
-    // speech.textContent = "";
-    
+    speech.textContent = "Does it really matter ? I sell ties, you can buy them, that's all.";
 }
 
 function leave_dialogue() {
@@ -121,8 +121,7 @@ function first_text() {
     else if (currentState === state.Shop) {
         shop_question();
     }
-
-    if (currentState === state.Talk) {
+    else if (currentState === state.Talk) {
         talk1();
     }
 }
@@ -132,9 +131,11 @@ function second_text() {
         talk_state();
         console.log("Talk state");
     }
-
-    if (currentState === state.Shop) {
+    else if (currentState === state.Shop) {
         kofi_link();
+    }
+    else if (currentState === state.Talk) {
+        talk2();
     }
 }
 
