@@ -32,14 +32,22 @@ function shop_state() {
     var text2 = document.getElementById("SecondText");
     var text3 = document.getElementById("ThirdText");
 
-    text1.textContent =  "[Something ??]";
-    text2.textContent = "[Ko-fi link]";
+    text1.textContent =  "What kind of design do you have ?";
+    text2.textContent = "[Get a tie]";
     text3.textContent = "[Return]";
 }
 
 // Shop dialogue options
 // function 
 // FIXME : decide what the first option should be about
+// "How do you make the ties ?"
+
+function shop_question() {
+    var speech = document.getElementById("SpeechBubble");
+    // speech.textContent = "I have differents design mostly inspired by various piece of media, but who can be wear with more casual outfit. Some desigins are sublte enough to not be seen as a reference immediatly.";
+    speech.textContent = "I have differents design mostly inspired by various piece of media, but not all of them are straigforward. I'm sure you'll find something you like. Feel free to check my shop.";
+
+}
 
 function kofi_link() {
     url="https://ko-fi.com/s/5a60ba39ef";
@@ -110,9 +118,13 @@ function first_text() {
         shop_state();
         console.log("Shop state");
     }
+    else if (currentState === state.Shop) {
+        shop_question();
+    }
 
     if (currentState === state.Talk) {
-        talk1();    }
+        talk1();
+    }
 }
 
 function second_text() {
