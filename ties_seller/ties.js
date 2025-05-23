@@ -8,6 +8,7 @@ var currentState = state.Init;
 
 var talk_count = 0;
 var leave_count = 0;
+var image_click_count = 0;
 
 // Initial state
 function initial_state() {
@@ -160,6 +161,31 @@ function third_text() {
     }
 }
 
+function image_click() {
+    var speech = document.getElementById("SpeechBubble");
+
+    if (image_click_count === 0) {
+        speech.textContent = "1";
+    }
+    else if (image_click_count === 1) {
+        speech.textContent = "2";
+    }
+    else if (image_click_count === 2) {
+        speech.textContent = "3";
+    }
+    else if (image_click_count >= 3) {
+        speech.textContent = "4";
+    }
+    // else {
+    //     url="https://ko-fi.com/s/5a60ba39ef";
+    //     window.open(url, '_blank').focus();
+        
+    //     speech.textContent = ">:)";
+    // }
+
+    image_click_count += 1;
+}
+
 initial_state();
 
 var button1 = document.getElementById("FirstText");
@@ -170,3 +196,11 @@ button2.addEventListener("click", second_text);
 
 var button3 = document.getElementById("ThirdText");
 button3.addEventListener("click", third_text);
+
+var seller_image = document.getElementById("SellerImage");
+seller_image.addEventListener("click", image_click);
+
+// console.log(image)
+// document.getElementById("SellerImage").onclick = function() {
+// //your code here
+// }
