@@ -21,11 +21,12 @@ function initial_state() {
     text3.textContent = "[Leave]";
 }
 
+
 function shop_state() {
     currentState = state.Shop;
 
     var speech = document.getElementById("SpeechBubble");
-    speech.textContent = "Ooooh, I see you are interested in my ties! I have a wide variety of colors and patterns. Do you have a specific color in mind?";
+    speech.textContent = "I see you are interested in my ties! I have a wide variety of colors and patterns. I'm sure you'll find something you like.";
 
     var text1 = document.getElementById("FirstText");
     var text2 = document.getElementById("SecondText");
@@ -36,11 +37,32 @@ function shop_state() {
     text3.textContent = "[Return]";
 }
 
+// Shop dialogue options
+// function 
+// FIXME : decide what the first option should be about
+
+function kofi_link() {
+    url="https://ko-fi.com/s/5a60ba39ef";
+    window.open(url, '_blank').focus();
+
+    var speech = document.getElementById("SpeechBubble");
+    speech.textContent = "Thank you for having checked my shop!";
+}
+
 function talk_state() {
     currentState = state.Talk;
 
     var speech = document.getElementById("SpeechBubble");
-    speech.textContent = "What do you want ?"
+
+    if (talk_count === 0) {
+        speech.textContent = "What do you want ?"
+    }
+    else if (talk_count === 1) {
+        speech.textContent = "Yes ?";
+    }
+    else if (talk_count > 1) {
+        speech.textContent = "Want to talk *again*?";
+    }
 
     var text1 = document.getElementById("FirstText");
     var text2 = document.getElementById("SecondText");
@@ -49,8 +71,12 @@ function talk_state() {
     text1.textContent = "Something";
     text2.textContent = "Something else";
     text3.textContent = "[Return]";
+
+    talk_count += 1;
 }
 
+// Talk dialogue options
+// FIXME : Figure out what to talk about actually
 function talk1() {
     var speech = document.getElementById("SpeechBubble");
     // speech.textContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ipsum arcu, tempor auctor quam non, ultricies venenatis lacus. In sed purus nec ante pharetra euismod non tempor mauris. Suspendisse vel. ";
@@ -63,31 +89,23 @@ function talk2() {
     
 }
 
-function kofi_link() {
-    url="https://ko-fi.com/s/5a60ba39ef";
-    window.open(url, '_blank').focus();
-
-    var speech = document.getElementById("SpeechBubble");
-    // speech.textContent = "What do you want ?" // FIXME: 
-}
-
 function leave_dialogue() {
     var speech = document.getElementById("SpeechBubble");
 
     if (leave_count === 0) {
         speech.textContent = "Did you really think you could leave ?";
     }
-    else if (leave_count > 0) {
+    else if (leave_count === 1) {
         speech.textContent = "Trying that again ?";
+    }
+    else if (leave_count > 1) {
+        speech.textContent = "*Sigh*";
     }
 
     leave_count += 1;
 }
 
 function first_text() {
-    // var speech = document.getElementById("SpeechBubble");
-    // speech.textContent = "Ooooh, I see you are interested in my ties! I have a wide variety of colors and patterns. Do you have a specific color in mind?";
-
     if (currentState === state.Init) {
         shop_state();
         console.log("Shop state");
@@ -98,9 +116,6 @@ function first_text() {
 }
 
 function second_text() {
-    // var speech = document.getElementById("SpeechBubble");
-    // speech.textContent = "I have a special offer for you! If you buy two ties, you get a third one for free! What do you think?";
-
     if (currentState === state.Init) {
         talk_state();
         console.log("Talk state");
@@ -112,19 +127,14 @@ function second_text() {
 }
 
 function third_text() {
-    // var speech = document.getElementById("SpeechBubble");
-    // speech.textContent = "I understand, sometimes you just want to browse. If you change your mind, I'll be here!";
-
     if (currentState != state.Init) {
         initial_state();
 
         var speech = document.getElementById("SpeechBubble");
         speech.textContent = "Want something else ?";
-        console.log("Init state");
     }
     else if (currentState === state.Init) {
         leave_dialogue();
-        console.log("Leave state");
     }
 }
 
