@@ -161,8 +161,7 @@ function third_text() {
     }
 }
 
-function image_click() {
-    var possible_dialogues = ["Wot?",
+var possible_dialogues = ["Wot?",
         "I can talk about the Roman Empire, if you insist. By the way did you read my book?",
         "Oi not here, I'm ticklish...",
         "<a href='https://www.instagram.com/obscurely_artistic/'>Curity</a> made this drawing of me. Isn't it SO COOL?",
@@ -171,15 +170,22 @@ function image_click() {
         "Don't stay here too long. There are vampires in the area... inhale awkwardly"
     ];
 
-    var discount_dialogues = "Ok ok... Take that 10% discount code on my shop (<a href='https://ko-fi.com/angellilou/link/10SELLER'>10SELLER</a>) and GET OUT!";
+var discount_dialogues = "Ok ok... Take that 10% discount code on my shop (<a href='https://ko-fi.com/angellilou/link/10SELLER'>10SELLER</a>) and GET OUT!";
 
-    if (image_click_count > 3) {
+var previous_id = -1;
+
+function image_click() {
+    if (image_click_count === 3) {
         possible_dialogues.push(discount_dialogues);
     }
 
     var speech = document.getElementById("SpeechBubble");
 
     var random_id = Math.floor(Math.random()*possible_dialogues.length);
+    while (random_id === previous_id) {
+        random_id = Math.floor(Math.random()*possible_dialogues.length);
+    }
+    previous_id = random_id;
     var random_text = possible_dialogues[random_id];
     speech.innerHTML = random_text;
 
@@ -200,7 +206,6 @@ button3.addEventListener("click", third_text);
 var seller_image = document.getElementById("SellerImage");
 seller_image.addEventListener("click", image_click);
 
-// console.log(image)
 // document.getElementById("SellerImage").onclick = function() {
 // //your code here
 // }
