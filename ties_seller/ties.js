@@ -162,7 +162,7 @@ function third_text() {
 }
 
 var possible_dialogues = ["Wot?",
-        "I can talk about the Roman Empire, if you insist. By the way did you read my book?",
+        "I can talk about the Roman Empire, if you insist. By the way did you read my <a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/angellilou/shop/books'>book</a>?",
         "Oi not here, I'm ticklish...",
         "<a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/obscurely_artistic/'>Curity</a> made this drawing of me. Isn't it SO COOL?",
         "The secret to succeed in art is crime. Trust me.",
