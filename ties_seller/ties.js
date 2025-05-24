@@ -164,13 +164,13 @@ function third_text() {
 var possible_dialogues = ["Wot?",
         "I can talk about the Roman Empire, if you insist. By the way did you read my book?",
         "Oi not here, I'm ticklish...",
-        "<a href='https://www.instagram.com/obscurely_artistic/'>Curity</a> made this drawing of me. Isn't it SO COOL?",
+        "<a target='_blank' rel='noopener noreferrer' href='https://www.instagram.com/obscurely_artistic/'>Curity</a> made this drawing of me. Isn't it SO COOL?",
         "The secret to succeed in art is crime. Trust me.",
         "Pick a tie so I can buy a Citroën Traction 11.",
         "Don't stay here too long. There are vampires in the area... inhale awkwardly"
     ];
 
-var discount_dialogues = "Ok ok... Take that 10% discount code on my shop (<a href='https://ko-fi.com/angellilou/link/10SELLER'>10SELLER</a>) and GET OUT!";
+var discount_dialogues = "Ok ok... Take that 10% discount code on my shop (<a target='_blank' rel='noopener noreferrer' href='https://ko-fi.com/angellilou/link/10SELLER'>10SELLER</a>) and GET OUT!";
 
 var previous_id = -1;
 
