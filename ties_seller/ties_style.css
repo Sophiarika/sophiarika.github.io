@@ -16,6 +16,11 @@ hr {
   color: rgb(197, 197, 197);
 }
 
+a {
+  color: rgb(18, 17, 119);
+  /* text-decoration: none; */
+}
+
 .main_container {
   display: flex;
   align-items: center;
