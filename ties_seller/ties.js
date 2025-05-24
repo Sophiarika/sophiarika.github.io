@@ -165,7 +165,7 @@ function image_click() {
     var possible_dialogues = ["Wot?",
         "I can talk about the Roman Empire, if you insist. By the way did you read my book?",
         "Oi not here, I'm ticklish...",
-        "Curity made this drawing of me. Isn't it SO COOL?",
+        "<a href='https://www.instagram.com/obscurely_artistic/'>Curity</a> made this drawing of me. Isn't it SO COOL?",
         "The secret to succeed in art is crime. Trust me.",
         "Pick a tie so I can buy a Citroën Traction 11.",
         "Don't stay here too long. There are vampires in the area... inhale awkwardly"
@@ -177,36 +177,11 @@ function image_click() {
         possible_dialogues.push(discount_dialogues);
     }
 
-    console.log("Image clicked: " + image_click_count);
-    console.log("Possible dialogues: " + possible_dialogues.length);
-    console.log("Possible dialogues: " + possible_dialogues);
-
     var speech = document.getElementById("SpeechBubble");
 
     var random_id = Math.floor(Math.random()*possible_dialogues.length);
-    console.log("Random ID: " + random_id);
     var random_text = possible_dialogues[random_id];
-
     speech.innerHTML = random_text;
-
-    // if (image_click_count === 0) {
-    //     speech.innerHTML = "Visit <a href=\"http://bing.com\">Bing</a>.";
-    // }
-    // else if (image_click_count === 1) {
-    //     speech.textContent = "2";
-    // }
-    // else if (image_click_count === 2) {
-    //     speech.textContent = "3";
-    // }
-    // else if (image_click_count >= 3) {
-    //     speech.textContent = "4";
-    // }
-    // else {
-    //     url="https://ko-fi.com/s/5a60ba39ef";
-    //     window.open(url, '_blank').focus();
-        
-    //     speech.textContent = ">:)";
-    // }
 
     image_click_count += 1;
 }
