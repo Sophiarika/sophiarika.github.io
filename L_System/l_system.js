@@ -57,11 +57,9 @@ let start_point_Y = canvas.height;
 let rotation = 0; // Initial rotation angle
 let direction = 0; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
 
-// Number of iterations
-const iterations = document.getElementById('iterations').value;
-
 // Function to generate the L-system string
-function generateLSystem(axiom, rules, iterations) {
+function generateLSystem(axiom, rules) {
+    var iterations = document.getElementById('iterations').value;
     let result = axiom;
     for (let i = 0; i < iterations; i++) {
         let nextResult = "";
@@ -76,7 +74,11 @@ function generateLSystem(axiom, rules, iterations) {
 
 // Function to draw the L-system string
 function drawLSystem(lSystemString) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    // canvas.width = canvas.width;
+    // context.clearRect(0, 0, canvas.width, canvas.height);
+    context.reset();
+    console.log(`Drawing L-system string: ${lSystemString}`);
+    direction = 0; // Reset direction to right
     context.beginPath();
     context.moveTo(start_point_X, start_point_Y);
 
@@ -124,7 +126,7 @@ function drawLSystem(lSystemString) {
 var generate_button = document.getElementById("generate_button");
 generate_button.addEventListener("click", () => {
     // Generate the L-system string
-    const lSystemString = generateLSystem(axiom, rules, iterations);
+    var lSystemString = generateLSystem(axiom, rules);
     // Initialize current position
     context.currentX = start_point_X;
     context.currentY = start_point_Y;
