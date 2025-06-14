@@ -30,17 +30,32 @@ const ctx = canvas.getContext("2d");
 // ctx.fillStyle = "red";
 // ctx.fillRect(0, 0, 250, 250);
 
-// Grammar rules
-// TODO : Add a way to input rules dynamically
-// TODO : Also add some built in rules for common L-systems
-const rules = {
-    "A": "AB",
-    "B": "A"
+
+// Variable 
+const variable = ["F"];
+
+// Constants
+const constants = {
+    "+": "+",
+    "-": "-"
 };
 
 // Initial axiom
 // TODO : Add a way to input axiom dynamically
-const axiom = "A";
+const axiom = "F";
+
+// Grammar rules
+// TODO : Add a way to input rules dynamically
+// TODO : Also add some built in rules for common L-systems
+const rules = {
+    "F": "F+F-F-F+F"
+};
+
+// global variables
+let start_point_X = canvas.width / 2; 
+let start_point_Y = canvas.height / 2;
+let rotation = 0; // Initial rotation angle
+let direction = 0; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
 
 // Number of iterations
 const iterations = document.getElementById('iterations').value;
@@ -63,18 +78,45 @@ function generateLSystem(axiom, rules, iterations) {
 function drawLSystem(lSystemString) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
-    ctx.moveTo(canvas.width / 2, canvas.height / 2); // Start in the center of the canvas
+    ctx.moveTo(start_point_X, start_point_Y);
 
     for (let char of lSystemString) {
-        if (char === "A") {
-            ctx.lineTo(ctx.currentX + 10, ctx.currentY); // Move right
-            ctx.currentX += 10;
-        } else if (char === "B") {
-            ctx.lineTo(ctx.currentX - 10, ctx.currentY); // Move left
-            ctx.currentX -= 10;
+        if (char === "F") {
+            switch (direction) {
+                case 0: // Right
+                    ctx.lineTo(ctx.currentX + 10, ctx.currentY);
+                    ctx.currentX += 10;
+                    break;
+                case 1: // Up
+                    ctx.lineTo(ctx.currentX, ctx.currentY - 10);
+                    ctx.currentY -= 10;
+                    break;
+                case 2: // Left
+                    ctx.lineTo(ctx.currentX - 10, ctx.currentY);
+                    ctx.currentX -= 10;
+                    break;
+                case 3: // Down
+                    ctx.lineTo(ctx.currentX, ctx.currentY + 10);
+                    ctx.currentY += 10;
+                    break;
+            }
+            // ctx.lineTo(ctx.currentX + 10, ctx.currentY); // Move right
+            // ctx.currentX += 10;
+        } else if (char === "+") {
+            // ctx.translate(ctx.currentX, ctx.currentY); // Save current position
+            rotation += Math.PI / 2; // Rotate 90 degrees clockwise
+            // ctx.rotate(rotation);
+            // ctx.lineTo(ctx.currentX - 10, ctx.currentY); // Move left
+            // ctx.currentX -= 10;
+            direction = ((direction + 1) % 4 + 4) % 4;
+        } else if (char === "-") {
+            // ctx.translate(ctx.currentX, ctx.currentY); // Save current position
+            rotation -= Math.PI / 2; // Rotate 90 degrees counter-clockwise
+            // ctx.rotate(rotation);
+            direction = ((direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
         }
+        console.log(`Character: ${char}, Current Position: (${ctx.currentX}, ${ctx.currentY}), direction: ${direction})`);
     }
-
     ctx.stroke();
 }
 
@@ -84,8 +126,8 @@ generate_button.addEventListener("click", () => {
     // Generate the L-system string
     const lSystemString = generateLSystem(axiom, rules, iterations);
     // Initialize current position
-    ctx.currentX = canvas.width / 2;
-    ctx.currentY = canvas.height / 2;
+    ctx.currentX = start_point_X;
+    ctx.currentY = start_point_Y;
     // Draw the L-system string
     drawLSystem(lSystemString);
 });
