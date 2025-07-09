@@ -1,9 +1,53 @@
 body {
-    background-color:  #e3b34c;
+    background-color:  palegoldenrod; /* e3b34c */
   }
-  h1 {
+
+h1 {
     color: blue;
   }
-  p {
+
+  p{
     color: green;
   }
+
+  li {
+  list-style-type: circle;
+}
+
+.special {
+  color: orange;
+  font-weight: bold;
+}
+
+
+li em {
+  color: rebeccapurple;
+}
+
+h1 + p {
+  font-size: 200%;
+}
+
+a:link {
+  color: pink;
+}
+
+a:visited {
+  color: green;
+}
+
+a:hover {
+  text-decoration: none;
+  color:black;
+}
+
+body h1 + p .special {
+  color: yellow;
+  background-color: black;
+  padding: 5px;
+}
+
+span:hover {
+  color: red;
+}
+
