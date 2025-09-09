@@ -7,9 +7,23 @@
   </head>
   <body>
 
+    <div style="text-align: center;">
+      <h1>L-System Generator</h1>
+    </div>
+
     <div class="main_container">
+      <div class="panel">
+        <h1>Choose a system</h1>
+        <p>
+          Koch curve
+        </p>
+
+      </div>
       <div class="l_system_container">
-        <canvas id="lSystemCanvas" width="500" height="500" style="border:1px solid black;"></canvas>
+        <canvas id="lSystemCanvas" class="l_system_canvas" width="500" height="500"></canvas>
+      </div>
+      <div class="panel">
+        <h2>Generate Pattern</h2>
         <div class="controls">
           <button id="generate_button">Generate</button>
           <label for="iterations">Iterations:</label>

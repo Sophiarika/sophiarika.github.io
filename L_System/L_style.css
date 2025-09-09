@@ -1,0 +1,41 @@
+.main_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* width: 100%;
+  height: 100%; */
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: lightgrey;
+  border: 3px solid darkgray;
+  border-radius: 10px;
+  padding: 10px;
+  
+  width: 250px;
+}
+
+.l_system_container {
+  /* border: rgb(255, 0, 0) solid; */
+
+  padding: 10px;
+
+  /* width: 500px;
+  height: 500px; */
+}
+
+.l_system_canvas {
+  border: 1px solid black;
+
+  width: 500px;
+  height: 500px;
+
+  /* background-color: white;
+
+  display: block; */
+}
