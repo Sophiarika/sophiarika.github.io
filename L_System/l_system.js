@@ -1,29 +1,46 @@
-// import * as THREE from "three"; // "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.174.0/three.tsl.js";
+//// Basic Systems ////
 
-// const scene = new THREE.Scene();
-// const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+/// Koch Curve ///
+// Variables
+const KochCurve_variables = ["F"];
 
-// const renderer = new THREE.WebGLRenderer();
-// renderer.setSize( window.innerWidth, window.innerHeight );
-// renderer.setAnimationLoop( animate );
-// document.body.appendChild( renderer.domElement );
+// Constants
+const KochCurve_constants = {
+    "+": "+",
+    "-": "-"
+};
 
-// const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-// const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-// const cube = new THREE.Mesh( geometry, material );
-// scene.add( cube );
+// Axiom
+const KochCurve_axiom = "F";
 
-// camera.position.z = 5;
+// Rules
+const KochCurve_rules = {
+    "F": "F+F-F-F+F"
+};
 
-// function animate() {
+/// Binary tree ///
+// Variables
+const BinaryTree_variables = ["0", "1"];
 
-//   cube.rotation.x += 0.01;
-//   cube.rotation.y += 0.01;
+// Constants
+const BinaryTree_constants = {
+    "[": "[",
+    "]": "]"
+};
 
-//   renderer.render( scene, camera );
+// Axiom
+const BinaryTree_axiom = "0";
 
-// }
+// Rules
+const BinaryTree_rules = {
+    "1": "11",
+    "0": "1[0]0"
+};
 
+
+
+
+//// General implementation ////
 
 const canvas = document.getElementById("lSystemCanvas");
 const context = canvas.getContext("2d");
@@ -32,24 +49,21 @@ const context = canvas.getContext("2d");
 
 
 // Variable 
-const variable = ["F"];
+const variable = KochCurve_variables;
 
 // Constants
-const constants = {
-    "+": "+",
-    "-": "-"
-};
+const constants = KochCurve_constants; // FIXME : dynamically get constants
+
+
 
 // Initial axiom
 // TODO : Add a way to input axiom dynamically
-const axiom = "F";
+const axiom = KochCurve_axiom;
 
 // Grammar rules
 // TODO : Add a way to input rules dynamically
 // TODO : Also add some built in rules for common L-systems
-const rules = {
-    "F": "F+F-F-F+F"
-};
+const rules = KochCurve_rules;
 
 // global variables
 let start_point_X = 0; // canvas.width ; 
