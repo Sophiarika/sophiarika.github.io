@@ -119,8 +119,11 @@ function drawBinaryTree() {
     context.beginPath();
     context.moveTo(system.start_point_X, system.start_point_Y);
 
+    let lifo = [];
+    let lifo_pop = {};
+
     for (let char of this.generated_system) {
-        if (char === "0") {
+        if (char === "0" || char === "1") {
             switch (this.direction) {
                 case 0: // Right
                     context.lineTo(context.currentX + 10, context.currentY);
@@ -139,21 +142,22 @@ function drawBinaryTree() {
                     context.currentY += 10;
                     break;
             }
-            // context.lineTo(context.currentX + 10, context.currentY); // Move right
-            // context.currentX += 10;
-        } else if (char === "+") {
-            // context.translate(context.currentX, context.currentY); // Save current position
-            this.rotation += Math.PI / 2; // Rotate 90 degrees clockwise
-            // context.rotate(rotation);
-            // context.lineTo(context.currentX - 10, context.currentY); // Move left
-            // context.currentX -= 10;
+        } else if (char === "[") {
+            lifo.push({x: context.currentX, y: context.currentY, rotation: this.rotation, direction: this.direction});
+            this.rotation -= Math.PI / 4; // Rotate 45 degrees counter-clockwise
             this.direction = ((this.direction + 1) % 4 + 4) % 4;
-        } else if (char === "-") {
-            // context.translate(context.currentX, context.currentY); // Save current position
-            this.rotation -= Math.PI / 2; // Rotate 90 degrees counter-clockwise
-            // context.rotate(rotation);
+
+        } else if (char === "]") {
+            lifo_pop = lifo.pop();
+            context.currentX = lifo_pop.x;
+            context.currentY = lifo_pop.y;
+            this.rotation = lifo_pop.rotation;
+            this.direction = lifo_pop.direction;
+
+            this.rotation += Math.PI / 4; // Rotate 45 degrees clockwise
             this.direction = ((this.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
         }
+
         console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${this.direction})`);
     }
     context.stroke();
@@ -183,7 +187,7 @@ generate_button.addEventListener("click", () => {
 
 /// System selection ///
 let system_radio = document.forms["system_form"].elements["system"];
-document.getElementById("kochCurve").checked = true;
+document.getElementById("kochCurve").checked = true; // FIXME : Use that for all the onclick functions ? 
 
 console.log(system_radio.value);
 console.log(system_radio[0]);
@@ -197,10 +201,3 @@ for (i = 0; i < system_radio.length; i++) {
         }
     }
 }
-
-
-// if (system_radio["kochCurve"].checked) {
-//   system = KochCurve;
-// } else if (system_radio["binaryTree"].checked) {
-//   system = BinaryTree;
-// }
