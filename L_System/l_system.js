@@ -1,42 +1,33 @@
+//// Import ////
+// import { KochCurve, BinaryTree } from './modules/systems.js';
+
+//// System class ////
+class System {
+    constructor(variables, constants, axiom, rules) {
+        this.variables = variables;
+        this.constants = constants;
+        this.axiom = axiom;
+        this.rules = rules;
+    }
+}
+
 //// Basic Systems ////
-
 /// Koch Curve ///
-// Variables
-const KochCurve_variables = ["F"];
-
-// Constants
-const KochCurve_constants = {
-    "+": "+",
-    "-": "-"
-};
-
-// Axiom
-const KochCurve_axiom = "F";
-
-// Rules
-const KochCurve_rules = {
-    "F": "F+F-F-F+F"
-};
+const KochCurve = new System(
+    ["F"], // Variables
+    {"+": "+",
+        "-": "-" }, // Constants
+    "F", // Axiom
+    {"F": "F+F-F-F+F"} // Rules
+);
 
 /// Binary tree ///
-// Variables
-const BinaryTree_variables = ["0", "1"];
-
-// Constants
-const BinaryTree_constants = {
-    "[": "[",
-    "]": "]"
-};
-
-// Axiom
-const BinaryTree_axiom = "0";
-
-// Rules
-const BinaryTree_rules = {
-    "1": "11",
-    "0": "1[0]0"
-};
-
+const BinaryTree = new System(
+    ["0", "1"], // Variables
+    { "[": "[", "]": "]" }, // Constants
+    "0", // Axiom
+    { "1": "11", "0": "1[0]0" } // Rules
+);
 
 
 
@@ -49,21 +40,21 @@ const context = canvas.getContext("2d");
 
 
 // Variable 
-const variable = KochCurve_variables;
+const variable = KochCurve.variables;
 
 // Constants
-const constants = KochCurve_constants; // FIXME : dynamically get constants
+const constants = KochCurve.constants; // FIXME : dynamically get constants
 
 
 
 // Initial axiom
 // TODO : Add a way to input axiom dynamically
-const axiom = KochCurve_axiom;
+const axiom = KochCurve.axiom;
 
 // Grammar rules
 // TODO : Add a way to input rules dynamically
 // TODO : Also add some built in rules for common L-systems
-const rules = KochCurve_rules;
+const rules = KochCurve.rules;
 
 // global variables
 let start_point_X = 0; // canvas.width ; 
