@@ -9,6 +9,20 @@ class System {
         this.axiom = axiom;
         this.rules = rules;
     }
+
+    generateLSystem(iterations) {
+        let result = this.axiom;
+        for (let i = 0; i < iterations; i++) {
+            let nextResult = "";
+            for (let char of result) {
+                nextResult += this.rules[char] || char; // Apply rules or keep the character
+                // TODO : Add aleatory behavior to the rules
+            }
+            result = nextResult;
+        }
+        this.generated_system = result;
+        return result; // FIXME : remove this
+    }
 }
 
 //// Basic Systems ////
@@ -29,7 +43,22 @@ const BinaryTree = new System(
     { "1": "11", "0": "1[0]0" } // Rules
 );
 
+// function set_system(system) {
+//     // Variable 
+//     variable = system.variables;
 
+//     // Constants
+//     constants = system.constants;
+
+//     // Axiom
+//     // TODO : Add a way to input axiom dynamically
+//     axiom = system.axiom;
+
+//     // Rules
+//     // TODO : Add a way to input rules dynamically
+//     // TODO : Also add some built in rules for common L-systems
+//     rules = system.rules;
+// }
 
 //// General implementation ////
 
@@ -39,22 +68,22 @@ const context = canvas.getContext("2d");
 // context.fillRect(0, 0, 250, 250);
 
 
-// Variable 
-const variable = KochCurve.variables;
+// // Variable 
+// let variable = KochCurve.variables;
 
-// Constants
-const constants = KochCurve.constants; // FIXME : dynamically get constants
+// // Constants
+// let constants = KochCurve.constants; // FIXME : dynamically get constants
 
+// // Initial axiom
+// let axiom = KochCurve.axiom;
 
+// // Grammar rules
+// let rules = KochCurve.rules;
 
-// Initial axiom
-// TODO : Add a way to input axiom dynamically
-const axiom = KochCurve.axiom;
+// set_system(KochCurve); // Set system according to radio button selection
 
-// Grammar rules
-// TODO : Add a way to input rules dynamically
-// TODO : Also add some built in rules for common L-systems
-const rules = KochCurve.rules;
+let system = KochCurve; // Default system
+
 
 // global variables
 let start_point_X = 0; // canvas.width ; 
@@ -63,19 +92,19 @@ let rotation = 0; // Initial rotation angle
 let direction = 0; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
 
 // Function to generate the L-system string
-function generateLSystem(axiom, rules) {
-    var iterations = document.getElementById('iterations').value;
-    let result = axiom;
-    for (let i = 0; i < iterations; i++) {
-        let nextResult = "";
-        for (let char of result) {
-            nextResult += rules[char] || char; // Apply rules or keep the character
-            // TODO : Add aleatory behavior to the rules
-        }
-        result = nextResult;
-    }
-    return result;
-}
+// function generateLSystem(axiom, rules) {
+//     var iterations = document.getElementById('iterations').value;
+//     let result = axiom;
+//     for (let i = 0; i < iterations; i++) {
+//         let nextResult = "";
+//         for (let char of result) {
+//             nextResult += rules[char] || char; // Apply rules or keep the character
+//             // TODO : Add aleatory behavior to the rules
+//         }
+//         result = nextResult;
+//     }
+//     return result;
+// }
 
 // Function to draw the L-system string
 function drawLSystem(lSystemString) {
@@ -128,10 +157,11 @@ function drawLSystem(lSystemString) {
 }
 
 
-var generate_button = document.getElementById("generate_button");
+let generate_button = document.getElementById("generate_button");
 generate_button.addEventListener("click", () => {
     // Generate the L-system string
-    var lSystemString = generateLSystem(axiom, rules);
+    let iterations = document.getElementById('iterations').value;
+    let lSystemString = system.generateLSystem(iterations);
     // Initialize current position
     context.currentX = start_point_X;
     context.currentY = start_point_Y;
