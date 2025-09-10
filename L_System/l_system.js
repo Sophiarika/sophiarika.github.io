@@ -112,7 +112,57 @@ let BinaryTree = new System(
     { "1": "11", "0": "1[0]0" } // Rules
 );
 
+function drawBinaryTree() {
+    context.reset();
+    console.log(`Drawing L-system string: ${this.generated_system}`);
+    this.direction = 1; // Reset direction to up
+    context.beginPath();
+    context.moveTo(system.start_point_X, system.start_point_Y);
 
+    for (let char of this.generated_system) {
+        if (char === "0") {
+            switch (this.direction) {
+                case 0: // Right
+                    context.lineTo(context.currentX + 10, context.currentY);
+                    context.currentX += 10;
+                    break;
+                case 1: // Up
+                    context.lineTo(context.currentX, context.currentY - 10);
+                    context.currentY -= 10;
+                    break;
+                case 2: // Left
+                    context.lineTo(context.currentX - 10, context.currentY);
+                    context.currentX -= 10;
+                    break;
+                case 3: // Down
+                    context.lineTo(context.currentX, context.currentY + 10);
+                    context.currentY += 10;
+                    break;
+            }
+            // context.lineTo(context.currentX + 10, context.currentY); // Move right
+            // context.currentX += 10;
+        } else if (char === "+") {
+            // context.translate(context.currentX, context.currentY); // Save current position
+            this.rotation += Math.PI / 2; // Rotate 90 degrees clockwise
+            // context.rotate(rotation);
+            // context.lineTo(context.currentX - 10, context.currentY); // Move left
+            // context.currentX -= 10;
+            this.direction = ((this.direction + 1) % 4 + 4) % 4;
+        } else if (char === "-") {
+            // context.translate(context.currentX, context.currentY); // Save current position
+            this.rotation -= Math.PI / 2; // Rotate 90 degrees counter-clockwise
+            // context.rotate(rotation);
+            this.direction = ((this.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
+        }
+        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${this.direction})`);
+    }
+    context.stroke();
+}
+
+// canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down) 
+BinaryTree.set_global_variables(canvas.width/2, canvas.height, 0, 1);
+// Set starting point at the bottom-center of the canvas, facing up
+BinaryTree.set_drawLSystem_function(drawBinaryTree);
 
 //// General implementation ////
 let system = KochCurve; // Default system
@@ -130,3 +180,27 @@ generate_button.addEventListener("click", () => {
     // Draw the L-system string
     system.drawLSystem();
 });
+
+/// System selection ///
+let system_radio = document.forms["system_form"].elements["system"];
+document.getElementById("kochCurve").checked = true;
+
+console.log(system_radio.value);
+console.log(system_radio[0]);
+
+for (i = 0; i < system_radio.length; i++) {
+    system_radio[i].onclick = function() {
+        if (this.value === "kochCurve") {
+            system = KochCurve;
+        } else if (this.value === "binaryTree") {
+            system = BinaryTree;
+        }
+    }
+}
+
+
+// if (system_radio["kochCurve"].checked) {
+//   system = KochCurve;
+// } else if (system_radio["binaryTree"].checked) {
+//   system = BinaryTree;
+// }
