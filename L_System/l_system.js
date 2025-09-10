@@ -11,6 +11,13 @@ class System {
         this.generated_system = "";
     }
 
+    set_global_variables(startX, startY, initialRotation, initialDirection) {
+        this.start_point_X = startX;
+        this.start_point_Y = startY;
+        this.rotation = initialRotation;
+        this.direction = initialDirection; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
+    }
+
     generateLSystem(iterations) {
         this.generated_system = this.axiom;
         for (let i = 0; i < iterations; i++) {
@@ -21,6 +28,11 @@ class System {
             }
             this.generated_system = nextResult;
         }
+    }
+
+    drawLSystem() {
+        this.generated_system
+        // TODO : Implement drawing function
     }
 }
 
@@ -52,13 +64,8 @@ const context = canvas.getContext("2d");
 
 let system = KochCurve; // Default system
 
-
-// global variables
-let start_point_X = 0; // canvas.width ; 
-let start_point_Y = canvas.height;
-let rotation = 0; // Initial rotation angle
-let direction = 0; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
-
+system.set_global_variables(0, canvas.height, 0, 0); // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down) 
+// Set starting point at bottom-left corner, facing right
 
 // Function to draw the L-system string
 function drawLSystem(lSystemString) {
@@ -66,13 +73,13 @@ function drawLSystem(lSystemString) {
     // context.clearRect(0, 0, canvas.width, canvas.height);
     context.reset();
     console.log(`Drawing L-system string: ${lSystemString}`);
-    direction = 0; // Reset direction to right
+    system.direction = 0; // Reset direction to right
     context.beginPath();
-    context.moveTo(start_point_X, start_point_Y);
+    context.moveTo(system.start_point_X, system.start_point_Y);
 
     for (let char of lSystemString) {
         if (char === "F") {
-            switch (direction) {
+            switch (system.direction) {
                 case 0: // Right
                     context.lineTo(context.currentX + 10, context.currentY);
                     context.currentX += 10;
@@ -94,18 +101,18 @@ function drawLSystem(lSystemString) {
             // context.currentX += 10;
         } else if (char === "+") {
             // context.translate(context.currentX, context.currentY); // Save current position
-            rotation += Math.PI / 2; // Rotate 90 degrees clockwise
+            system.rotation += Math.PI / 2; // Rotate 90 degrees clockwise
             // context.rotate(rotation);
             // context.lineTo(context.currentX - 10, context.currentY); // Move left
             // context.currentX -= 10;
-            direction = ((direction + 1) % 4 + 4) % 4;
+            system.direction = ((system.direction + 1) % 4 + 4) % 4;
         } else if (char === "-") {
             // context.translate(context.currentX, context.currentY); // Save current position
-            rotation -= Math.PI / 2; // Rotate 90 degrees counter-clockwise
+            system.rotation -= Math.PI / 2; // Rotate 90 degrees counter-clockwise
             // context.rotate(rotation);
-            direction = ((direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
+            system.direction = ((system.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
         }
-        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${direction})`);
+        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${system.direction})`);
     }
     context.stroke();
 }
@@ -117,8 +124,8 @@ generate_button.addEventListener("click", () => {
     let iterations = document.getElementById('iterations').value;
     system.generateLSystem(iterations);
     // Initialize current position
-    context.currentX = start_point_X;
-    context.currentY = start_point_Y;
+    context.currentX = system.start_point_X;
+    context.currentY = system.start_point_Y;
     // Draw the L-system string
     drawLSystem(system.generated_system);
 });
