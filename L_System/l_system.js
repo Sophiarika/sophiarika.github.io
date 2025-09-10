@@ -8,10 +8,11 @@ class System {
         this.constants = constants;
         this.axiom = axiom;
         this.rules = rules;
-        this.generated_system = this.axiom;
+        this.generated_system = "";
     }
 
     generateLSystem(iterations) {
+        this.generated_system = this.axiom;
         for (let i = 0; i < iterations; i++) {
             let nextResult = "";
             for (let char of this.generated_system) {
