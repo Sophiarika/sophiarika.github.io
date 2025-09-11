@@ -11,6 +11,10 @@ class System {
         this.generated_system = "";
     }
 
+    drawLSystem() {
+        console.log("No draw function defined yet.");
+    }
+
     set_global_variables(startX, startY, initialRotation, initialDirection) {
         this.start_point_X = startX;
         this.start_point_Y = startY;
@@ -35,6 +39,8 @@ class System {
     }
 }
 
+// TODO : See if I can make a more general implementation of the drawLSystem function, maybe by harmonizing the grammars
+
 //// Constants ////
 const canvas = document.getElementById("lSystemCanvas");
 const context = canvas.getContext("2d");
@@ -57,43 +63,63 @@ function drawKochCurve() {
     context.reset();
     console.log(`Drawing L-system string: ${this.generated_system}`);
     this.direction = 0; // Reset direction to right
+    this.rotation = 0; // Reset rotation to 0
     context.beginPath();
-    context.moveTo(system.start_point_X, system.start_point_Y);
+    let X = this.start_point_X;
+    let Y = this.start_point_Y;
+    context.moveTo(X, Y);
 
     for (let char of this.generated_system) {
         if (char === "F") {
             switch (this.direction) {
                 case 0: // Right
-                    context.lineTo(context.currentX + 10, context.currentY);
-                    context.currentX += 10;
+                    xv = 1;
+                    xy = 0;                
+                    X = context.currentX + ((xv * Math.cos(this.rotation) - xy * Math.sin(this.rotation)) * 10);
+                    Y = context.currentY + ((xv * Math.sin(this.rotation) + xy * Math.cos(this.rotation)) * 10);
+
+                    context.lineTo(X, Y);
+                    context.currentX = X;
+                    context.currentY = Y;
                     break;
                 case 1: // Up
-                    context.lineTo(context.currentX, context.currentY - 10);
-                    context.currentY -= 10;
+                    xv = 0;
+                    xy = -1;
+                    X = context.currentX + ((xv * Math.cos(this.rotation) - xy * Math.sin(this.rotation)) * 10);
+                    Y = context.currentY + ((xv * Math.sin(this.rotation) + xy * Math.cos(this.rotation)) * 10);
+
+                    context.lineTo(X, Y);
+                    context.currentX = X;
+                    context.currentY = Y;
                     break;
                 case 2: // Left
-                    context.lineTo(context.currentX - 10, context.currentY);
-                    context.currentX -= 10;
+                    xv = -1;
+                    xy = 0;
+                    X = context.currentX + ((xv * Math.cos(this.rotation) - xy * Math.sin(this.rotation)) * 10);
+                    Y = context.currentY + ((xv * Math.sin(this.rotation) + xy * Math.cos(this.rotation)) * 10);
+
+                    context.lineTo(X, Y);
+                    context.currentX = X;
+                    context.currentY = Y;
                     break;
                 case 3: // Down
-                    context.lineTo(context.currentX, context.currentY + 10);
-                    context.currentY += 10;
+                    xv = 0;
+                    xy = 1;                
+                    X = context.currentX + ((xv * Math.cos(this.rotation) - xy * Math.sin(this.rotation)) * 10);
+                    Y = context.currentY + ((xv * Math.sin(this.rotation) + xy * Math.cos(this.rotation)) * 10);
+
+                    context.lineTo(X, Y);
+                    context.currentX = X;
+                    context.currentY = Y;
                     break;
             }
-            // context.lineTo(context.currentX + 10, context.currentY); // Move right
-            // context.currentX += 10;
+
         } else if (char === "+") {
-            // context.translate(context.currentX, context.currentY); // Save current position
-            this.rotation += Math.PI / 2; // Rotate 90 degrees clockwise
-            // context.rotate(rotation);
-            // context.lineTo(context.currentX - 10, context.currentY); // Move left
-            // context.currentX -= 10;
-            this.direction = ((this.direction + 1) % 4 + 4) % 4;
-        } else if (char === "-") {
-            // context.translate(context.currentX, context.currentY); // Save current position
             this.rotation -= Math.PI / 2; // Rotate 90 degrees counter-clockwise
-            // context.rotate(rotation);
-            this.direction = ((this.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
+            // this.direction = ((this.direction + 1) % 4 + 4) % 4;
+        } else if (char === "-") {
+            this.rotation += Math.PI / 2; // Rotate 90 degrees clockwise
+            // this.direction = ((this.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
         }
         console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${this.direction})`);
     }
@@ -144,7 +170,7 @@ function drawBinaryTree() {
             }
         } else if (char === "[") {
             lifo.push({x: context.currentX, y: context.currentY, rotation: this.rotation, direction: this.direction});
-            this.rotation -= Math.PI / 4; // Rotate 45 degrees counter-clockwise
+            this.rotation += Math.PI / 4; // Rotate 45 degrees counter-clockwise
             this.direction = ((this.direction + 1) % 4 + 4) % 4;
 
         } else if (char === "]") {
@@ -154,7 +180,7 @@ function drawBinaryTree() {
             this.rotation = lifo_pop.rotation;
             this.direction = lifo_pop.direction;
 
-            this.rotation += Math.PI / 4; // Rotate 45 degrees clockwise
+            this.rotation -= Math.PI / 4; // Rotate 45 degrees clockwise
             this.direction = ((this.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
         }
 
