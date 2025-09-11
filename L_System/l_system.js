@@ -179,9 +179,10 @@ function drawBinaryTree() {
             rotation = lifo_pop.rotation;
             direction = lifo_pop.direction;
 
+            context.moveTo(context.currentX, context.currentY);
+
             rotation += Math.PI / 4; // Rotate 45 degrees clockwise
         }
-        context.moveTo(context.currentX, context.currentY);
 
         console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), rotation: ${rotation}, direction: ${direction})`);
     }
