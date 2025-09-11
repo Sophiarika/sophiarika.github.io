@@ -106,7 +106,7 @@ function drawKochCurve() {
             rotation += Math.PI / 2; // Rotate 90 degrees clockwise
             // this.direction = ((this.direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
         }
-        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${direction})`);
+        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), rotation: ${rotation}, direction: ${direction})`);
     }
     context.stroke();
 }
@@ -141,6 +141,7 @@ function drawBinaryTree() {
     let lifo_pop = {};
 
     for (let char of this.generated_system) {
+        console.log(`Before : Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), rotation: ${rotation}, direction: ${direction})`);
         if (char === "0" || char === "1") {
             switch (direction) {
                 case 0: // Right
@@ -169,8 +170,7 @@ function drawBinaryTree() {
 
         } else if (char === "[") {
             lifo.push({x: context.currentX, y: context.currentY, rotation: rotation, direction: direction});
-            rotation += Math.PI / 4; // Rotate 45 degrees counter-clockwise
-            // direction = ((direction + 1) % 4 + 4) % 4;
+            rotation -= Math.PI / 4; // Rotate 45 degrees counter-clockwise
 
         } else if (char === "]") {
             lifo_pop = lifo.pop();
@@ -179,11 +179,11 @@ function drawBinaryTree() {
             rotation = lifo_pop.rotation;
             direction = lifo_pop.direction;
 
-            rotation -= Math.PI / 4; // Rotate 45 degrees clockwise
-            // direction = ((direction - 1) % 4 + 4) % 4; // ((this % n) + n) % n
+            rotation += Math.PI / 4; // Rotate 45 degrees clockwise
         }
+        context.moveTo(context.currentX, context.currentY);
 
-        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), direction: ${direction})`);
+        console.log(`Character: ${char}, Current Position: (${context.currentX}, ${context.currentY}), rotation: ${rotation}, direction: ${direction})`);
     }
     context.stroke();
 }
