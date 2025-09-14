@@ -25,10 +25,6 @@ class System {
         this.initial_direction = initialDirection; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
     }
 
-    set_drawLSystem_function(drawFunction) {
-        this.drawLSystem = drawFunction;
-    }
-
     generateLSystem(iterations) {
         this.generated_system = this.axiom;
         for (let i = 0; i < iterations; i++) {
@@ -88,7 +84,7 @@ class System {
 
         for (let char of this.generated_system) {
             if (char === "F" || char === "G") {
-                
+                // Move forward and draw
                 X = context.currentX + ((xv * Math.cos(rotation) - xy * Math.sin(rotation)) * 10);
                 Y = context.currentY + ((xv * Math.sin(rotation) + xy * Math.cos(rotation)) * 10);
 
@@ -98,19 +94,25 @@ class System {
 
             } else if (char === "f") {
                 // Move forward without drawing
-                X = context.currentX + ((xv * Math.cos(rotation) - xy * Math.sin(rotation)) * 10);
-                Y = context.currentY + ((xv * Math.sin(rotation) + xy * Math.cos(rotation)) * 10);
+                context.currentX = context.currentX + ((xv * Math.cos(rotation) - xy * Math.sin(rotation)) * 10);
+                context.currentY = context.currentY + ((xv * Math.sin(rotation) + xy * Math.cos(rotation)) * 10);
+
+                context.moveTo(context.currentX, context.currentY);
 
             } else if (char === "+") {
-                rotation -= this.angle; // Rotate counter-clockwise
+                // Rotate counter-clockwise
+                rotation -= this.angle;
 
             } else if (char === "-") {
-                rotation += this.angle; // Rotate clockwise
+                // Rotate clockwise
+                rotation += this.angle;
 
             } else if (char === "[") {
-            lifo.push({x: context.currentX, y: context.currentY, rotation: rotation, direction: direction});
+                // Push current state to stack
+                lifo.push({x: context.currentX, y: context.currentY, rotation: rotation, direction: direction});
 
             } else if (char === "]") {
+                // Pop previous state from stack
                 lifo_pop = lifo.pop();
                 context.currentX = lifo_pop.x;
                 context.currentY = lifo_pop.y;
@@ -126,7 +128,6 @@ class System {
     }
 }
 
-// TODO : See if I can make a more general implementation of the drawLSystem function, maybe by harmonizing the grammars
 
 //// Constants ////
 const canvas = document.getElementById("lSystemCanvas");
@@ -145,9 +146,9 @@ let KochCurve = new System(
     Math.PI/2 // Angle
 );
 
+// canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
+KochCurve.set_global_variables(0, canvas.height, 0, 0); // Set starting point at bottom-left corner, facing right
 
-KochCurve.set_global_variables(0, canvas.height, 0, 0); // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down) 
-// Set starting point at bottom-left corner, facing right
 
 /// Binary tree ///
 let BinaryTree = new System(
@@ -163,8 +164,6 @@ let BinaryTree = new System(
 
 // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down) 
 BinaryTree.set_global_variables(canvas.width/2, canvas.height, 0, 1); // Set starting point at the bottom-center of the canvas, facing up
-
-
 
 
 //// General implementation ////
