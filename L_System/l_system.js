@@ -174,16 +174,23 @@ let Empty = new System(
     {}, // Rules
     0 // Angle
 );
+Empty.set_global_variables(canvas.width/2, canvas.height/2, 0, 0);
 
 
 //// General implementation ////
 function setLsystem() { // Called when the user choose a predefined system
+    document.getElementById('x_start').value = system.start_point_X;
+    document.getElementById('y_start').value = system.start_point_Y;
+
     document.getElementById('axiom').value = system.axiom;
     document.getElementById('rules').value = JSON.stringify(system.rules); // TODO : Make one rules per line
     document.getElementById('angle').value = system.angle;
 }
 
 function updateLsystem() {
+    system.start_point_X = parseFloat(document.getElementById('x_start').value);
+    system.start_point_Y = parseFloat(document.getElementById('y_start').value);
+
     system.axiom = document.getElementById('axiom').value;
     system.rules = JSON.parse(document.getElementById('rules').value);
     system.angle = parseFloat(document.getElementById('angle').value);
