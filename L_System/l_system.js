@@ -177,14 +177,19 @@ let Empty = new System(
 
 
 //// General implementation ////
-let system = KochCurve; // Default system
-
 function setLsystem() { // Called when the user choose a predefined system
     document.getElementById('axiom').value = system.axiom;
     document.getElementById('rules').value = JSON.stringify(system.rules); // TODO : Make one rules per line
     document.getElementById('angle').value = system.angle;
 }
 
+function updateLsystem() {
+    system.axiom = document.getElementById('axiom').value;
+    system.rules = JSON.parse(document.getElementById('rules').value);
+    system.angle = parseFloat(document.getElementById('angle').value);
+}
+
+let system = KochCurve; // Default system
 setLsystem();
 
 /// Generate button ///
@@ -192,6 +197,7 @@ let generate_button = document.getElementById("generate_button");
 generate_button.addEventListener("click", () => {
     // Generate the L-system string
     let iterations = document.getElementById('iterations').value;
+    updateLsystem();
     system.generateLSystem(iterations);
     // Initialize current position
     context.currentX = system.start_point_X;
