@@ -26,6 +26,11 @@
               <input type="radio" id="binaryTree" name="system" value="binaryTree" />
               <label for="binaryTree">Binary Tree</label>
             </div>
+
+            <div>
+              <input type="radio" id="Empty" name="system" value="Empty" />
+              <label for="Empty">Empty</label>
+            </div>
           </fieldset>
         </form>
 
@@ -35,11 +40,20 @@
       </div>
     
       <div class="panel">
-        <h2>Generate a pattern</h2>
+        <h2>Edit L-System</h2>
         <div class="controls">
-          <button id="generate_button">Generate</button>
+          <label for="axiom">Axiom:</label>
+          <input type="text" id="axiom" value="F">
+          <label for="rules">Rules:</label> <!-- TODO : Add different boxes to get the informations and a system to show up what's selected (espcially for rules) -->
+          <input type="text" id="rules" value="F+F-F-F+F">
+        </div>
+
+        <h2>Generate pattern</h2>
+        <div class="controls">
           <label for="iterations">Iterations:</label>
           <input type="number" id="iterations" value="3" min="1" max="10">
+          </br>
+          <button id="generate_button">Generate</button>
         </div>
       </div>
     </div>

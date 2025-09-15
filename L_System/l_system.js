@@ -3,11 +3,15 @@
 
 //// System class ////
 class System {
-    constructor(variables, constants, axiom, rules, angle) {
-        this.variables = variables;
-        this.constants = constants;
-        this.axiom = axiom;
-        this.rules = rules;
+    constructor(axiom, rules, angle) {
+        this.variables = ["F", "G", "f", "g"]; // Variables
+        this.constants = { "+": "+",
+            "-": "-",
+            "[": "[",
+            "]": "]" }, // Constants
+
+        this.axiom = axiom; // TODO : Add safeguard to make sure axiom is valid
+        this.rules = rules; // TODO : Add safeguard to make sure rules are valid
 
         this.angle = angle;
 
@@ -92,7 +96,7 @@ class System {
                 context.currentX = X;
                 context.currentY = Y;
 
-            } else if (char === "f") {
+            } else if (char === "f" || char === "g") {
                 // Move forward without drawing
                 context.currentX = context.currentX + ((xv * Math.cos(rotation) - xy * Math.sin(rotation)) * 10);
                 context.currentY = context.currentY + ((xv * Math.sin(rotation) + xy * Math.cos(rotation)) * 10);
@@ -101,7 +105,7 @@ class System {
 
             } else if (char === "+") {
                 // Rotate counter-clockwise
-                rotation -= this.angle;
+                rotation -= this.angle; // sens trigo
 
             } else if (char === "-") {
                 // Rotate clockwise
@@ -138,13 +142,16 @@ const context = canvas.getContext("2d");
 //// Basic Systems ////
 /// Koch Curve ///
 let KochCurve = new System(
-    ["F"], // Variables
-    { "+": "+",
-        "-": "-" }, // Constants
     "F", // Axiom
     {"F": "F+F-F-F+F"}, // Rules
     Math.PI/2 // Angle
 );
+
+// let something = { // FIXME 
+//     "F": {rules: ["F+F-F-F+F", "F+F+F-F-F-F+F+F+F"], // Example of multiple rules for the same variable
+//         probabilities: [0.5, 0.5]} // Example of probabilities for each rule (should sum to 1)
+            // Use weight instead of probabilities ?
+// }
 
 // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
 KochCurve.set_global_variables(0, canvas.height, 0, 0); // Set starting point at bottom-left corner, facing right
@@ -152,11 +159,6 @@ KochCurve.set_global_variables(0, canvas.height, 0, 0); // Set starting point at
 
 /// Binary tree ///
 let BinaryTree = new System(
-    ["F", "G"], // Variables
-    { "+": "+",
-        "-": "-",
-        "[": "[",
-        "]": "]" }, // Constants
     "F", // Axiom
     { "G": "GG", "F": "G[+F]-F" }, // Rules
     Math.PI/4 // Angle
@@ -165,9 +167,22 @@ let BinaryTree = new System(
 // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down) 
 BinaryTree.set_global_variables(canvas.width/2, canvas.height, 0, 1); // Set starting point at the bottom-center of the canvas, facing up
 
+let Empty = new System(
+    [], // Variables
+    {}, // Constants
+    "", // Axiom
+    {}, // Rules
+    0 // Angle
+);
+
 
 //// General implementation ////
 let system = KochCurve; // Default system
+
+function setLsystem(system) { // Called when the user choose a predefined system
+    
+
+}
 
 /// Generate button ///
 let generate_button = document.getElementById("generate_button");
@@ -195,6 +210,8 @@ for (i = 0; i < system_radio.length; i++) {
             system = KochCurve;
         } else if (this.value === "binaryTree") {
             system = BinaryTree;
+        } else if (this.value === "Empty") {
+            system = Empty;
         }
     }
 }
