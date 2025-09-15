@@ -159,8 +159,8 @@ KochCurve.set_global_variables(0, canvas.height, 0, 0); // Set starting point at
 
 /// Binary tree ///
 let BinaryTree = new System(
-    "F", // Axiom
-    { "G": "GG", "F": "G[+F]-F" }, // Rules
+    "G", // Axiom
+    { "F": "FF", "G": "F[+G]-G" }, // Rules
     Math.PI/4 // Angle
 );
 
@@ -179,10 +179,13 @@ let Empty = new System(
 //// General implementation ////
 let system = KochCurve; // Default system
 
-function setLsystem(system) { // Called when the user choose a predefined system
-    
-
+function setLsystem() { // Called when the user choose a predefined system
+    document.getElementById('axiom').value = system.axiom;
+    document.getElementById('rules').value = JSON.stringify(system.rules); // TODO : Make one rules per line
+    document.getElementById('angle').value = system.angle;
 }
+
+setLsystem();
 
 /// Generate button ///
 let generate_button = document.getElementById("generate_button");
@@ -213,5 +216,7 @@ for (i = 0; i < system_radio.length; i++) {
         } else if (this.value === "Empty") {
             system = Empty;
         }
+        setLsystem();
+        console.log(`System changed to: ${this.value}`);
     }
 }
