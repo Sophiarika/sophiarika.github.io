@@ -1,6 +1,16 @@
 //// Import ////
 // import { KochCurve, BinaryTree } from './modules/systems.js';
 
+//// Misc ////
+function rad2deg(rad) {
+    return rad * (180 / Math.PI);
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+}
+
+
 //// System class ////
 class System {
     constructor(axiom, rules, angle) {
@@ -184,7 +194,7 @@ function setLsystem() { // Called when the user choose a predefined system
 
     document.getElementById('axiom').value = system.axiom;
     document.getElementById('rules').value = JSON.stringify(system.rules); // TODO : Make one rules per line
-    document.getElementById('angle').value = system.angle;
+    document.getElementById('angle').value = rad2deg(system.angle);
 
     switch (system.initial_direction) {
         case 0: // Right
@@ -208,7 +218,7 @@ function updateLsystem() {
 
     system.axiom = document.getElementById('axiom').value;
     system.rules = JSON.parse(document.getElementById('rules').value);
-    system.angle = parseFloat(document.getElementById('angle').value);
+    system.angle = deg2rad(parseFloat(document.getElementById('angle').value));
 
     if (document.getElementById("right").checked === true) {
         system.initial_direction = 0;
