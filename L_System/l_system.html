@@ -14,25 +14,39 @@
     <div class="main_container">
       <div class="panel">
         <h1>Choose a system</h1>
-        <form id="system_form">
-          <fieldset>
-            <!-- <legend>Choose your monster's features:</legend> -->
-            <div>
-              <input type="radio" id="kochCurve" name="system" value="kochCurve" checked />
-              <label for="kochCurve">Koch Curve</label>
-            </div>
+        <div class="controls">
+          <form id="system_form">
+            <fieldset>
+              <!-- <legend>Choose your monster's features:</legend> -->
+              <div>
+                <input type="radio" id="kochCurve" name="system" value="kochCurve" checked />
+                <label for="kochCurve">Koch Curve</label>
+              </div>
 
-            <div>
-              <input type="radio" id="binaryTree" name="system" value="binaryTree" />
-              <label for="binaryTree">Binary Tree</label>
-            </div>
+              <div>
+                <input type="radio" id="binaryTree" name="system" value="binaryTree" />
+                <label for="binaryTree">Binary Tree</label>
+              </div>
 
-            <div>
-              <input type="radio" id="Empty" name="system" value="Empty" />
-              <label for="Empty">Empty</label>
-            </div>
-          </fieldset>
-        </form>
+              <div>
+                <input type="radio" id="Empty" name="system" value="Empty" />
+                <label for="Empty">Empty</label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <h2>Legend</h2>
+        <div class="controls">
+          <p>F: Move forward and draw a line</p>
+          <p>G: Move forward and draw a line</p>
+          <p>f: Move forward without drawing a line</p>
+          <p>g: Move forward without drawing a line</p>
+          <p>other letters: do nothing</p>
+          <p>+: Turn left by a defined angle</p>
+          <p>-: Turn right by a defined angle</p>
+          <p>[ : Push current drawing state to the stack</p>
+          <p>] : Pop previous drawing state from the stack</p>
+        </div>
 
       </div>
       <div class="l_system_container">
