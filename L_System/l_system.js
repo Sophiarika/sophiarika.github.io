@@ -22,11 +22,11 @@ class System {
         console.log("No draw function defined yet.");
     }
 
-    set_global_variables(startX, startY, initialRotation, initialDirection) {
+    set_global_variables(startX, startY, initialDirection) {
         this.start_point_X = startX;
         this.start_point_Y = startY;
-        this.initial_rotation = initialRotation;
         this.initial_direction = initialDirection; // Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
+        // this.initial_rotation = initialRotation;
     }
 
     generateLSystem(iterations) {
@@ -54,7 +54,7 @@ class System {
         console.log(`Drawing L-system string: ${this.generated_system}`);
 
         let direction = this.initial_direction; // Reset direction
-        let rotation = this.initial_rotation; // Reset rotation
+        let rotation = 0; // Reset rotation
         let X = this.start_point_X;
         let Y = this.start_point_Y;
     
@@ -154,7 +154,7 @@ let KochCurve = new System(
 // }
 
 // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down)
-KochCurve.set_global_variables(0, canvas.height, 0, 0); // Set starting point at bottom-left corner, facing right
+KochCurve.set_global_variables(0, canvas.height,0); // Set starting point at bottom-left corner, facing right
 
 
 /// Binary tree ///
@@ -165,7 +165,7 @@ let BinaryTree = new System(
 );
 
 // canvas.width ; canvas.height ; Initial rotation angle ; Initial direction (0 = right, 1 = up, 2 = left, 3 = down) 
-BinaryTree.set_global_variables(canvas.width/2, canvas.height, 0, 1); // Set starting point at the bottom-center of the canvas, facing up
+BinaryTree.set_global_variables(canvas.width/2, canvas.height, 1); // Set starting point at the bottom-center of the canvas, facing up
 
 let Empty = new System(
     [], // Variables
@@ -174,7 +174,7 @@ let Empty = new System(
     {}, // Rules
     0 // Angle
 );
-Empty.set_global_variables(canvas.width/2, canvas.height/2, 0, 0);
+Empty.set_global_variables(canvas.width/2, canvas.height/2, 0);
 
 
 //// General implementation ////
@@ -185,6 +185,21 @@ function setLsystem() { // Called when the user choose a predefined system
     document.getElementById('axiom').value = system.axiom;
     document.getElementById('rules').value = JSON.stringify(system.rules); // TODO : Make one rules per line
     document.getElementById('angle').value = system.angle;
+
+    switch (system.initial_direction) {
+        case 0: // Right
+            document.getElementById("right").checked = true;
+            break;
+        case 1: // Up
+            document.getElementById("up").checked = true;
+            break;
+        case 2: // Left
+            document.getElementById("left").checked = true;
+            break;
+        case 3: // Down
+            document.getElementById("down").checked = true;
+            break;
+        }
 }
 
 function updateLsystem() {
@@ -194,6 +209,16 @@ function updateLsystem() {
     system.axiom = document.getElementById('axiom').value;
     system.rules = JSON.parse(document.getElementById('rules').value);
     system.angle = parseFloat(document.getElementById('angle').value);
+
+    if (document.getElementById("right").checked === true) {
+        system.initial_direction = 0;
+    } else if (document.getElementById("up").checked === true) {
+        system.initial_direction = 1;
+    } else if (document.getElementById("left").checked === true) {
+        system.initial_direction = 2;
+    } else if (document.getElementById("down").checked === true) {
+        system.initial_direction = 3;
+    }
 }
 
 let system = KochCurve; // Default system

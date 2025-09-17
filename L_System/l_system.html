@@ -57,6 +57,31 @@
           <input type="text" id="y_start" value="500">
         </div>
 
+        <form id="direction_form">
+          <fieldset>
+            <legend>Initial drawing direction :</legend>
+             <div>
+                <input type="radio" id="right" name="direction" value="right" checked />
+                <label for="right">Right</label>
+             </div>
+
+              <div>
+                <input type="radio" id="up" name="direction" value="up" />
+                <label for="up">Up</label>
+              </div>
+
+              <div>
+                <input type="radio" id="left" name="direction" value="left" />
+                <label for="left">Left</label>
+              </div>
+
+              <div>
+                <input type="radio" id="down" name="direction" value="down" />
+                <label for="down">Down</label>
+              </div>
+          </fieldset>
+        </form>
+
         <h2>Generate pattern</h2>
         <div class="controls">
           <label for="iterations">Iterations:</label>
