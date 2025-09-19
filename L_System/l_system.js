@@ -234,6 +234,35 @@ function updateLsystem() {
 let system = KochCurve; // Default system
 setLsystem();
 
+
+
+function parseRule() { // Read input rules and add it to system object
+}
+
+/// Rule add button ///
+let add_rule_button = document.getElementById("add_rule_button");
+function addRule() {
+    let new_rule = document.createElement('li');
+    let rule_text = document.createElement("span")
+    let supress_btn = document.createElement("button")
+    supress_btn.textContent = "X"
+    supress_btn.addEventListener("click", () => {
+        // Remove the rule from the list
+        new_rule.remove();
+        // TODO : supress rule from system
+    });
+
+    new_rule.appendChild(rule_text)
+    new_rule.appendChild(supress_btn)
+
+    rule_text.textContent = JSON.stringify(rule);
+
+
+    let rules_list = document.getElementById("rules_list");
+    rules_list.appendChild(new_rule);
+}
+// add_rule_button.addEventListener("click", addRule);
+
 /// Generate button ///
 let generate_button = document.getElementById("generate_button");
 generate_button.addEventListener("click", () => {
