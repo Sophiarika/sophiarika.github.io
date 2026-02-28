@@ -1,0 +1,16 @@
+body {
+    background-color:  #dbbb74; /* e3b34c */
+  }
+  h1 {
+    color: blue;
+  }
+  p {
+    color: maroon;
+  }
+
+  .en_tete {
+    background-color: #e3b34c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+  }
