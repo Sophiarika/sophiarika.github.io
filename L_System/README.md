@@ -17,3 +17,8 @@ An interactive website made to work in a navigator and allow to try some usual g
 | -             | Turn right by a defined angle                               |
 | [             | Push current drawing state to the stack                     |
 | ]             | Pop previous drawing state from the stack                   |
+
+
+```sh
+tsc src/*.ts --outfile l_system.js
+```

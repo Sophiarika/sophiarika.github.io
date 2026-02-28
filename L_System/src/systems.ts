@@ -1,7 +1,12 @@
 //// System class ////
 
 export class System {
-    constructor(variables, constants, axiom, rules) {
+    variables: string[];
+    constants: any; // FIXME : Make a dict class
+    axiom: string;
+    rules: any;
+
+    constructor(variables: string[], constants: any, axiom: string, rules: any) {
         this.variables = variables;
         this.constants = constants;
         this.axiom = axiom;
