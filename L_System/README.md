@@ -20,5 +20,7 @@ An interactive website made to work in a navigator and allow to try some usual g
 
 
 ```sh
-tsc src/*.ts --outfile l_system.js
+tsc src/*.ts --outfile l_system.js --module system
 ```
+
+FIXME : amd or system for module ? src/systems.ts:3:14 - error TS6131: Cannot compile modules using option 'outFile' unless the '--module' flag is 'amd' or 'system'.
